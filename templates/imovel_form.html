@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}{% if acao == 'editar' %}Editar Imóvel{% else %}Novo Imóvel{% endif %} | Imobiliária Marketplace{% endblock %}
+
+{% block content %}
+<main class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-10 col-xl-8">
+      <div class="panel-card p-4 p-lg-5">
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-4">
+          <div>
+            <h1 class="h3 fw-bold mb-1">{% if acao == 'editar' %}Editar imóvel{% else %}Novo imóvel{% endif %}</h1>
+            <p class="text-muted mb-0">Preencha os dados para publicar ou atualizar o anúncio.</p>
+          </div>
+          <a href="{{ url_for('admin') }}" class="btn btn-outline-dark">Voltar</a>
+        </div>
+
+        <form method="post" class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Tipo do imóvel</label>
+            <input type="text" class="form-control" name="tp_imovel" value="{{ imovel.tp_imovel if imovel else '' }}" required>
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Valor</label>
+            <input type="text" class="form-control" name="valor" value="{{ imovel.valor if imovel else '' }}" placeholder="Ex.: 850000,00" required>
+          </div>
+          <div class="col-md-8">
+            <label class="form-label">Endereço</label>
+            <input type="text" class="form-control" name="endereco" value="{{ imovel.endereco if imovel else '' }}" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Cidade</label>
+            <input type="text" class="form-control" name="cidade" value="{{ imovel.cidade if imovel else '' }}" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Estado</label>
+            <input type="text" class="form-control" name="estado" value="{{ imovel.estado if imovel else '' }}" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Quartos</label>
+            <input type="number" class="form-control" name="quant_quartos" value="{{ imovel.quant_quartos if imovel else 0 }}" min="0" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Vagas de garagem</label>
+            <input type="number" class="form-control" name="vagas_garagem" value="{{ imovel.vagas_garagem if imovel else 0 }}" min="0" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Área (m²)</label>
+            <input type="text" class="form-control" name="area_m2" value="{{ imovel.area_m2 if imovel else '' }}" placeholder="Ex.: 120,50" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Transação</label>
+            <select class="form-select" name="tp_transacao" required>
+              <option value="">Selecione</option>
+              <option value="Venda" {% if imovel and imovel.tp_transacao == 'Venda' %}selected{% endif %}>Venda</option>
+              <option value="Aluguel" {% if imovel and imovel.tp_transacao == 'Aluguel' %}selected{% endif %}>Aluguel</option>
+            </select>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Status</label>
+            <select class="form-select" name="status" required>
+              <option value="Disponivel" {% if imovel and imovel.status == 'Disponivel' %}selected{% endif %}>Disponível</option>
+              <option value="Vendido" {% if imovel and imovel.status == 'Vendido' %}selected{% endif %}>Vendido</option>
+              <option value="Alugado" {% if imovel and imovel.status == 'Alugado' %}selected{% endif %}>Alugado</option>
+              <option value="Inativo" {% if imovel and imovel.status == 'Inativo' %}selected{% endif %}>Inativo</option>
+            </select>
+          </div>
+          <div class="col-12">
+            <label class="form-label">Descrição</label>
+            <textarea class="form-control" name="descricao" rows="5" required>{{ imovel.descricao if imovel else '' }}</textarea>
+          </div>
+          <div class="col-12 d-grid d-md-flex gap-2 justify-content-md-end pt-2">
+            <button type="submit" class="btn btn-primary px-4">
+              {% if acao == 'editar' %}Salvar alterações{% else %}Cadastrar imóvel{% endif %}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
+

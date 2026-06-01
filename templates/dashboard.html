@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | Imobiliária Marketplace{% endblock %}
+
+{% block content %}
+<main class="container my-5">
+  <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4">
+    <div>
+      <h1 class="fw-bold mb-1">Dashboard administrativo</h1>
+      <p class="text-muted mb-0">Acompanhe os indicadores e gerencie os anúncios com rapidez.</p>
+    </div>
+    <a href="{{ url_for('novo_imovel') }}" class="btn btn-primary">
+      <i class="bi bi-plus-circle me-1"></i>Novo imóvel
+    </a>
+  </div>
+
+  <div class="row g-4 mb-4">
+    <div class="col-md-4">
+      <div class="stat-card">
+        <span>Imóveis</span>
+        <strong>{{ total_imoveis }}</strong>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card">
+        <span>Usuários</span>
+        <strong>{{ total_usuarios }}</strong>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="stat-card">
+        <span>Logs</span>
+        <strong>{{ total_logs }}</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="row g-4">
+    <div class="col-xl-8">
+      <div class="panel-card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="h5 mb-0">Imóveis cadastrados</h2>
+          <span class="text-muted small">{{ imoveis|length }} registros</span>
+        </div>
+
+        <div class="table-responsive">
+          <table class="table table-hover align-middle">
+            <thead>
+              <tr>
+                <th>Código</th>
+                <th>Tipo</th>
+                <th>Cidade</th>
+                <th>Transação</th>
+                <th>Valor</th>
+                <th>Status</th>
+                <th class="text-end">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for imovel in imoveis %}
+                <tr>
+                  <td>#{{ imovel.codigo }}</td>
+                  <td>{{ imovel.tp_imovel }}</td>
+                  <td>{{ imovel.cidade }}/{{ imovel.estado }}</td>
+                  <td>{{ imovel.tp_transacao }}</td>
+                  <td>{{ imovel.valor_formatado() }}</td>
+                  <td><span class="badge text-bg-success-subtle text-success">{{ imovel.status }}</span></td>
+                  <td class="text-end">
+                    <div class="btn-group btn-group-sm">
+                      <a href="{{ url_for('editar_imovel', id=imovel.codigo) }}" class="btn btn-outline-primary">Editar</a>
+                      <button class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ imovel.codigo }}">Excluir</button>
+                    </div>
+
+                    <div class="modal fade" id="deleteModal{{ imovel.codigo }}" tabindex="-1">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title">Excluir imóvel</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                          </div>
+                          <div class="modal-body">
+                            Tem certeza de que deseja excluir <strong>{{ imovel.tp_imovel }}</strong> em <strong>{{ imovel.endereco }}</strong>?
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cancelar</button>
+                            <form method="post" action="{{ url_for('excluir_imovel', id=imovel.codigo) }}">
+                              <button type="submit" class="btn btn-danger">Excluir</button>
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-xl-4">
+      <div class="panel-card p-4 mb-4">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <h2 class="h5 mb-0">Últimos logs</h2>
+        </div>
+        <div class="log-list">
+          {% for log in logs %}
+            <div class="log-item">
+              <div class="small text-muted">{{ log.dt_insert.strftime('%d/%m/%Y %H:%M') if log.dt_insert else '' }}</div>
+              <div>{{ log.log }}</div>
+            </div>
+          {% else %}
+            <p class="text-muted mb-0">Sem logs registrados.</p>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="panel-card p-4">
+        <h2 class="h5 mb-3">Atalhos</h2>
+        <div class="d-grid gap-2">
+          <a href="{{ url_for('novo_imovel') }}" class="btn btn-primary">Cadastrar novo imóvel</a>
+          <a href="{{ url_for('home') }}" class="btn btn-outline-dark">Ver página pública</a>
+          <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary">Sair</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
+

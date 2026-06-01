@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}{{ imovel.tp_imovel }} | Imobiliária Marketplace{% endblock %}
+
+{% block content %}
+<main class="container my-5">
+  <div class="row g-4">
+    <div class="col-lg-8">
+      <div class="detail-card p-4 p-lg-5">
+        <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-4">
+          <div>
+            <span class="badge text-bg-primary mb-2">{{ imovel.tp_transacao }}</span>
+            <h1 class="fw-bold mb-2">{{ imovel.tp_imovel }}</h1>
+            <p class="text-muted mb-0">{{ imovel.endereco }} • {{ imovel.cidade }} - {{ imovel.estado }}</p>
+          </div>
+          <div class="price-box">{{ imovel.valor_formatado() }}</div>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-sm-6 col-md-3"><div class="mini-stat"><span>Quartos</span><strong>{{ imovel.quant_quartos }}</strong></div></div>
+          <div class="col-sm-6 col-md-3"><div class="mini-stat"><span>Garagem</span><strong>{{ imovel.vagas_garagem }}</strong></div></div>
+          <div class="col-sm-6 col-md-3"><div class="mini-stat"><span>Área</span><strong>{{ imovel.area_m2 }} m²</strong></div></div>
+          <div class="col-sm-6 col-md-3"><div class="mini-stat"><span>Status</span><strong>{{ imovel.status }}</strong></div></div>
+        </div>
+
+        <section class="mb-4">
+          <h2 class="h5">Descrição</h2>
+          <p class="text-muted lh-lg">{{ imovel.descricao }}</p>
+        </section>
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="detail-side p-4">
+        <h3 class="h5 mb-3">Informações do imóvel</h3>
+        <ul class="list-unstyled detail-list mb-0">
+          <li><span>Tipo do imóvel</span><strong>{{ imovel.tp_imovel }}</strong></li>
+          <li><span>Valor</span><strong>{{ imovel.valor_formatado() }}</strong></li>
+          <li><span>Endereço</span><strong>{{ imovel.endereco }}</strong></li>
+          <li><span>Cidade</span><strong>{{ imovel.cidade }}</strong></li>
+          <li><span>Estado</span><strong>{{ imovel.estado }}</strong></li>
+          <li><span>Quartos</span><strong>{{ imovel.quant_quartos }}</strong></li>
+          <li><span>Garagem</span><strong>{{ imovel.vagas_garagem }}</strong></li>
+          <li><span>Área</span><strong>{{ imovel.area_m2 }} m²</strong></li>
+          <li><span>Status</span><strong>{{ imovel.status }}</strong></li>
+        </ul>
+        <a href="{{ url_for('home') }}" class="btn btn-outline-dark w-100 mt-4">Voltar para a busca</a>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}
+
