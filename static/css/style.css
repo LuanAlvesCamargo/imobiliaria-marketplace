@@ -1,26 +1,575 @@
+/* =========================
+   GERAL
+========================= */
+
 body {
-    background: #f5f7fb;
+    background-color: #f5f7fb;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    color: #2d3748;
 }
 
-.card {
-    border: none;
-    border-radius: 16px;
+a {
+    text-decoration: none;
 }
 
-.card img {
-    height: 250px;
-    object-fit: cover;
+.container {
+    max-width: 1400px;
+}
+
+/* =========================
+   NAVBAR
+========================= */
+
+.navbar {
+    background-color: #ffffff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .navbar-brand {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
+    font-weight: 700;
 }
 
-.btn-primary {
-    border-radius: 10px;
+.nav-link {
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #0d6efd;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero {
+    background: linear-gradient(135deg, #0d6efd, #3b82f6);
+    color: white;
+    padding: 80px 0;
+    margin-bottom: 40px;
+}
+
+.hero h1 {
+    font-weight: 700;
+    font-size: 3rem;
+}
+
+.hero p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* =========================
+   FILTROS
+========================= */
+
+.filter-box {
+    background: white;
+    border-radius: 16px;
+    padding: 25px;
+    margin-top: -50px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   CARDS DE IMÓVEIS
+========================= */
+
+.card {
+    border: none;
+    border-radius: 18px;
+    overflow: hidden;
+    transition: all .25s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
 }
 
 .card:hover {
-    transform: translateY(-3px);
-    transition: .2s;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.card img {
+    height: 240px;
+    object-fit: cover;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #0d6efd;
+}
+
+.location {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+.badge-property {
+    background-color: #e9f2ff;
+    color: #0d6efd;
+    padding: 6px 12px;
+    border-radius: 50px;
+}
+
+/* =========================
+   BOTÕES
+========================= */
+
+.btn-primary {
+    border-radius: 12px;
+    padding: 10px 20px;
+    font-weight: 600;
+}
+
+.btn-outline-primary {
+    border-radius: 12px;
+}
+
+/* =========================
+   DETALHES DO IMÓVEL
+========================= */
+
+.property-header {
+    background: white;
+    padding: 30px;
+    border-radius: 18px;
+    margin-bottom: 20px;
+}
+
+.property-price {
+    color: #0d6efd;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.property-info {
+    background: white;
+    padding: 25px;
+    border-radius: 18px;
+}
+
+.property-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.property-info li {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-container {
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-card {
+    width: 450px;
+    border-radius: 20px;
+    padding: 35px;
+    background: white;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================
+   DASHBOARD ADMIN
+========================= */
+
+.stats-card {
+    border-radius: 18px;
+    padding: 20px;
+    color: white;
+}
+
+.stats-card h3 {
+    font-size: 2rem;
+    margin: 0;
+}
+
+.stats-card p {
+    margin: 0;
+}
+
+.bg-blue {
+    background: #0d6efd;
+}
+
+.bg-green {
+    background: #198754;
+}
+
+.bg-orange {
+    background: #fd7e14;
+}
+
+.bg-purple {
+    background: #6f42c1;
+}
+
+/* =========================
+   TABELAS
+========================= */
+
+.table-container {
+    background: white;
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+}
+
+.table th {
+    font-weight: 600;
+}
+
+/* =========================
+   FORMULÁRIOS
+========================= */
+
+.form-control,
+.form-select {
+    border-radius: 12px;
+    padding: 12px;
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: none;
+    border-color: #0d6efd;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    background: #ffffff;
+    margin-top: 50px;
+    padding: 25px;
+    text-align: center;
+    color: #6c757d;
+    border-top: 1px solid #e5e7eb;
+}
+
+/* =========================
+   RESPONSIVO
+========================= */
+
+@media (max-width: 768px) {
+
+    .hero {
+        padding: 50px 0;
+    }
+
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .card img {
+        height: 180px;
+    }
+
+    .login-card {
+        width: 100%;
+    }
+}
+
+
+/* ==================================
+   PALETA NOVA
+================================== */
+
+:root {
+    --primary: #2563eb;
+    --primary-light: #3b82f6;
+    --dark: #0f172a;
+    --text: #334155;
+    --muted: #64748b;
+    --bg: #f8fafc;
+    --white: #ffffff;
+    --success: #16a34a;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+/* ==================================
+   HERO
+================================== */
+
+.hero-section {
+    background:
+        linear-gradient(135deg,
+            rgba(37, 99, 235, .95),
+            rgba(59, 130, 246, .90));
+    padding: 90px 0;
+    margin-bottom: 50px;
+}
+
+.hero-stats {
+    display: flex;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.hero-stats div {
+    display: flex;
+    flex-direction: column;
+}
+
+.hero-stats strong {
+    color: white;
+    font-size: 1.5rem;
+}
+
+.hero-stats span {
+    color: rgba(255, 255, 255, .85);
+    font-size: .9rem;
+}
+
+/* ==================================
+   GLASS CARD
+================================== */
+
+.glass-card {
+    background: rgba(255, 255, 255, .15);
+    backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, .20);
+    border-radius: 24px;
+    color: white;
+}
+
+/* ==================================
+   CARDS IMÓVEIS
+================================== */
+
+.property-card {
+    background: white;
+    border-radius: 22px;
+    overflow: hidden;
+    transition: .3s;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+    height: 100%;
+}
+
+.property-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .15);
+}
+
+.property-image {
+    height: 240px;
+    position: relative;
+
+    background:
+        linear-gradient(135deg,
+            #cbd5e1,
+            #e2e8f0);
+}
+
+.property-tag {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+
+    background: white;
+    padding: 8px 14px;
+
+    border-radius: 999px;
+
+    font-size: .85rem;
+    font-weight: 600;
+}
+
+.property-price {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+
+    color: white;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.property-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    color: var(--muted);
+    font-size: .9rem;
+}
+
+/* ==================================
+   DASHBOARD
+================================== */
+
+.stat-card {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+}
+
+.stat-card span {
+    display: block;
+    color: var(--muted);
+    margin-bottom: 8px;
+}
+
+.stat-card strong {
+    font-size: 2rem;
+    color: var(--dark);
+}
+
+.panel-card {
+    background: white;
+    border-radius: 22px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+}
+
+.log-item {
+    padding: 12px 0;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* ==================================
+   LOGIN
+================================== */
+
+.auth-page {
+    min-height: calc(100vh - 120px);
+
+    display: flex;
+    align-items: center;
+
+    padding: 60px 0;
+
+    background:
+        linear-gradient(135deg,
+            #eff6ff,
+            #f8fafc);
+}
+
+.auth-card {
+    background: white;
+    border-radius: 24px;
+}
+
+.auth-icon {
+    width: 80px;
+    height: 80px;
+
+    margin: auto;
+
+    border-radius: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 2rem;
+
+    background: #dbeafe;
+    color: var(--primary);
+}
+
+/* ==================================
+   DETALHES
+================================== */
+
+.detail-card,
+.detail-side {
+    background: white;
+    border-radius: 22px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+}
+
+.price-box {
+    color: var(--primary);
+    font-size: 2rem;
+    font-weight: bold;
+}
+
+.mini-stat {
+    background: #f8fafc;
+    border-radius: 16px;
+    padding: 15px;
+    text-align: center;
+}
+
+.mini-stat span {
+    display: block;
+    color: var(--muted);
+    font-size: .85rem;
+}
+
+.mini-stat strong {
+    color: var(--dark);
+    font-size: 1.2rem;
+}
+
+.detail-list li {
+    display: flex;
+    justify-content: space-between;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* ==================================
+   BOTÕES
+================================== */
+
+.btn-primary {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.btn-primary:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+}
+
+.btn-dark {
+    background: var(--dark);
+    border-color: var(--dark);
+}
+
+/* ==================================
+   NAVBAR
+================================== */
+
+.navbar-dark.bg-dark {
+    background: white !important;
+}
+
+.navbar-dark .navbar-brand,
+.navbar-dark .nav-link {
+    color: var(--dark) !important;
+}
+
+.navbar-dark .nav-link:hover {
+    color: var(--primary) !important;
+}
+
+/* ==================================
+   FOOTER
+================================== */
+
+.footer {
+    background: white;
+    border-top: 1px solid #e2e8f0;
 }

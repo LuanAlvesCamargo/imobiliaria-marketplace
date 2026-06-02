@@ -1,0 +1,51 @@
+services:
+  app:
+    image: python:3.12-slim
+
+    container_name: imobiliaria_app
+
+    working_dir: /app
+
+    volumes:
+      - .:/app
+
+    command: >
+      sh -c "
+      pip install --no-cache-dir -r requirements.txt &&
+      python app.py
+      "
+
+    ports:
+      - "5000:5000"
+
+    depends_on:
+      - mariadb
+
+    environment:
+      DB_HOST: mariadb
+      DB_PORT: 3306
+      DB_NAME: sistema_imobiliaria
+      DB_USER: root
+      DB_PASSWORD: 123123
+
+  mariadb:
+    image: mariadb:11
+
+    container_name: imobiliaria_db
+
+    restart: always
+
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: sistema_imobiliaria
+      MYSQL_USER: root
+      MYSQL_PASSWORD: 123123
+
+    ports:
+      - "3307:3306"
+
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+volumes:
+  mariadb_data:
